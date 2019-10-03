@@ -25,7 +25,7 @@ class Neuron:
         return x * (1 - x)
 
 
-    def train(self, inputs, outputs, iterations):
+    def train(self, inputs, outputs, iterations = 16384):
         """ The method which allows a model to make accurate predictions by
             continually adjusting the weights of the model."""
         # Make adjustments according to the specified number of iterations
