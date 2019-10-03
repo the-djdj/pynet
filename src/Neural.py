@@ -1,8 +1,8 @@
 from numpy import dot, exp, random
 
-class Network:
-    """ The neural network class. This defines the neural network and all of
-        it's methods."""
+class Neuron:
+    """ The neural network neuron class. This defines the neural network and all
+        of it's methods."""
 
     def __init__(self):
         """ The constructor. This sets a random seed for starting values, and
