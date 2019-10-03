@@ -4,14 +4,14 @@ class Neuron:
     """ The neural network neuron class. This defines the neural network and all
         of it's methods."""
 
-    def __init__(self):
+    def __init__(self, n = 3):
         """ The constructor. This sets a random seed for starting values, and
             creates the matrix for computing values."""
         # Create the seed for random number generation
         random.seed(1)
 
-        # Convert the weights to a 3x1 matrix, with values in [-1, 1], mean = 0
-        self.weights = 2 * random.random((3, 1)) - 1
+        # Convert the weights to a nx1 matrix, with values in [-1, 1], mean = 0
+        self.weights = 2 * random.random((n, 1)) - 1
 
 
     def sigmoid(self, x):
@@ -49,8 +49,5 @@ class Neuron:
         # Convert the inputs to floats
         inputs = inputs.astype(float)
 
-        # Calculate the dot product
-        output = self.sigmoid(dot(inputs, self.weights))
-
-        # And return our processed data
-        return output
+        # Calculate the dot product, and return
+        return self.sigmoid(dot(inputs, self.weights))
