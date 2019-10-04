@@ -1,4 +1,4 @@
-from numpy import array, transpose
+from numpy import append, array, transpose
 from Neural import Neuron
 
 if __name__ == '__main__':
@@ -12,11 +12,11 @@ if __name__ == '__main__':
     outputs = list()
 
     # Show what our weights are
-    print("Randomly generated weights: ")
+    print("\nRandomly generated weights: ")
     print(network.weights)
 
     # Print some useful output
-    print("Enter training data, line by line. Type EOF to finish.")
+    print("\nEnter training data, line by line. Type EOF to finish.")
 
     # Collect the training data
     line  = None
@@ -32,6 +32,9 @@ if __name__ == '__main__':
         # And increment our line counter
         index += 1
 
+    # Reset line for next time we use it
+    line = None
+
     # Make sure that inputs is an array
     inputs = array(inputs)
 
@@ -43,10 +46,33 @@ if __name__ == '__main__':
     network.train(inputs, outputs, 15000)
 
     # Show what our weights are
-    print("Trained weights: ")
+    print("\nTrained weights: ")
     print(network.weights)
 
-    line = str(input("Enter user data: "))
+    # Get user input in a loop
+    while line != "EOF":
+        # Get the line of input
+        line = str(input("\nEnter user data: "))
 
-    print("New output data: ")
-    print(network.think(array([ int(x) for x in line.split(" ") ])))
+        # Perform the calculation
+        if line != "EOF":
+            # Calculate the output
+            output = network.think(array([ int(x) for x in line.split(" ") ]))
+
+            # Show the user the output
+            print("New output data: {}".format(output))
+
+            # Check the data's correctness
+            if str(input("Does this look correct? [Yn]")).lower() == 'y':
+                # If it is correct, add it to the network, and recalculate
+                inputs = append(inputs, list([[int(x) for x in line.split(" ")]]), axis = 0)
+
+                # Add the result to the output
+                outputs = append(outputs, [output], axis = 0)
+
+                # Use these values to train the network
+                network.train(inputs, outputs, 15000)
+
+                # Show what our weights are
+                print("\nTrained weights: ")
+                print(network.weights)
