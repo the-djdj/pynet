@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
         # Append the data to our inputs variable
         if line != "EOF":
-            inputs.append(list(map(int, line.split(" "))))
+            inputs.append(list(map(float, line.split(" "))))
 
         # And increment our line counter
         index += 1
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     inputs = array(inputs)
 
     # Collect the training results
-    outputs.append(list(map(int, str(input("Results: ")).split(" "))))
+    outputs.append(list(map(float, str(input("Results: ")).split(" "))))
     outputs = transpose(outputs)
 
     # Use these values to train the network
@@ -57,7 +57,7 @@ if __name__ == '__main__':
         # Perform the calculation
         if line != "EOF":
             # Calculate the output
-            output = network.think(array([ int(x) for x in line.split(" ") ]))
+            output = network.think(array([float(x) for x in line.split(" ")]))
 
             # Show the user the output
             print("New output data: {}".format(output))
@@ -65,7 +65,7 @@ if __name__ == '__main__':
             # Check the data's correctness
             if str(input("Does this look correct? [Yn]")).lower() == 'y':
                 # If it is correct, add it to the network, and recalculate
-                inputs = append(inputs, list([[int(x) for x in line.split(" ")]]), axis = 0)
+                inputs = append(inputs, list([[float(x) for x in line.split(" ")]]), axis = 0)
 
                 # Add the result to the output
                 outputs = append(outputs, [output], axis = 0)
